@@ -1,0 +1,253 @@
+
+<html>
+
+<head> 
+			<%= stylesheet_link_tag "style.css" %>
+
+	<script type="text/javascript">
+	 <!--
+var image1=new Image()
+image1.src="/assets/banner1.jpg"
+var image2=new Image()
+image2.src="/assets/banner2.jpg"
+var image3=new Image()
+image3.src="/assets/banner3.jpg"
+var image4=new Image()
+image4.src="/assets/banner4.jpg"
+//-->
+</script>
+<script type="text/javascript">
+$(document).ready(function(){
+
+    //Check if the current URL contains '#'
+    if(document.URL.indexOf("#")==-1)
+    {
+    // Set the URL to whatever it was plus "#".
+    url = document.URL+"#";
+    location = "#";
+
+    //Reload the page
+    location.reload(true);
+
+    }
+    });
+</script>
+<style>
+      #map_canvas {
+        width: 600px;
+        height: 300px;
+      }
+    </style>
+    <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script>
+    var geocoder;
+  
+  var address ="Santa Clara University,Santa Clara, Ca";
+
+      function initialize() {
+
+    geocoder = new google.maps.Geocoder();
+    var latlng = new google.maps.LatLng(-34.397, 150.644);
+    var myOptions = {
+      zoom: 15,
+      center: latlng,
+    mapTypeControl: true,
+    mapTypeControlOptions: {style: google.maps.MapTypeControlStyle.DROPDOWN_MENU},
+    navigationControl: true,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+    if (geocoder) {
+      geocoder.geocode( { 'address': address}, function(results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+          if (status != google.maps.GeocoderStatus.ZERO_RESULTS) {
+          map.setCenter(results[0].geometry.location);
+
+            var infowindow = new google.maps.InfoWindow(
+                { content: '<b>'+address+'</b>',
+                  size: new google.maps.Size(150,50)
+                });
+
+            var marker = new google.maps.Marker({
+                position: results[0].geometry.location,
+                map: map, 
+                title:address
+            }); 
+            google.maps.event.addListener(marker, 'click', function() {
+                infowindow.open(map,marker);
+            });
+
+          } else {
+            alert("No results found");
+          }
+        } else {
+          alert("Geocode was not successful for the following reason: " + status);
+        }
+      });
+    }
+  }
+      google.maps.event.addDomListener(window, 'load', initialize);
+      
+google.maps.event.trigger(map, 'resize');
+
+
+    </script>
+	<style>
+	
+	
+	</style>
+<title> First App in ROR 
+	
+</title>
+</head>
+
+<body style="background-color: black">
+	<div id="imagecontainer" style="height: 450px">
+		<div id="header">
+			<div class="container"> 
+				
+				<!-- Logo -->
+				<div id="logo">
+					<h2>FundMe</h2>
+					<span>Donate and make life better</span>
+				</div>
+
+	<nav id="nav">
+					<ul>
+						<li><a href="main.html">Homepage</a></li>
+						<li ><a href="edu.html">Donate for Education</a></li>
+						<li><a href="rec.html">Donate for Recreation</a></li>
+						<li class="active"><a href="contact.html">Contact Us</a></li>
+						
+					</ul>
+				</nav>
+				</div>
+</div>
+</div>
+
+</div>
+
+<div style="width: 100%; overflow: hidden; ">
+    <div style="width: 900px; float: left;  margin: 0px 40px 10px 40px">
+    	<div align="center"><% if notice %>
+  <p class="alert alert-success"><%= notice %></p>
+<% end %>
+<% if alert %>
+  <p class="alert alert-danger"><%= alert %></p>
+<% end %></div>
+    	<div style="width: 100%; overflow: hidden; ">
+    		 <div style="width: 450px; float: left;  margin: 0px 0px 0px 0px">
+    		 	<p>&nbsp</p>
+    		 	<h1 style="color: white">Fund Me organization</h3>
+    		 	<h3 style="color: grey">204 Engineering dept,Santa Clara University
+    		 	<h3 style="color: grey">Santa Clara,Ca,95050</h1>
+    		 		<!--<input type="button" value="Show on Map" onClick="window.location.reload()">
+					-->
+    		 	<p>&nbsp;</p>
+    		 	<p style="color: grey">Telephone: 643-241-1242</p>
+    		 	<p style="color: grey">Fax: 800-233-6616</p>
+    		 	<p style="color: grey">Application Inquiries: community@fundme.org</p>
+    		 	<p style="color: grey">General Inquiries:  info@fundme.org</p>
+
+    		 	</div>
+    		 	    <div style="margin-left: 460px; "> <p>
+
+    	<p>&nbsp;</p>
+    	 <div id="map_canvas"></div>
+    	    	<p>&nbsp;</p>
+	</div>
+	</div>
+	<div align="center">
+	<iframe width="640" height="480" src="//www.youtube.com/embed/pkSpOfGOVO0?autoplay=1" frameborder="0" allowfullscreen></iframe>
+    </div>	
+    	<!--<img src="/assets/banner1.jpg" name="slide" width="800" height="500" style='margin: 0px 40px 40px 40px;' />-->
+	<script>
+<!--
+//variable that will increment through the images
+var step=1
+function slideit(){
+//if browser does not support the image object, exit.
+if (!document.images)
+return
+document.images.slide.src=eval("image"+step+".src")
+if (step<4)
+step++
+else
+step=1
+//call function "slideit()" every 2.5 seconds
+setTimeout("slideit()",3500)
+}
+slideit()
+</script>
+
+
+    					</div>
+
+    <div style="margin-left: 920px; "> <p>
+<% if user_signed_in? %>
+  Logged in as <strong><%= current_user.email %></strong>
+  <p><a href="info.html">Account information</a></p>
+  <%if Cart.exists?((session[:cart_id])) %>
+  <%cart = Cart.find(session[:cart_id])%>
+  <p><a href="http://localhost:3000/carts/<%=cart.id%>">Pending donations</a></p>
+  <%else%>
+  <p><a href="http://localhost:3000/fund_me/nocarts">Pending donations</a></p>
+  <% end %>
+  <p><a href="history.html">Transaction history</a></p>
+<% end %>
+<%= render 'devise/menu/registration_items' %>
+<%= render 'devise/menu/login_items' %>
+</p>
+
+<p>&nbsp</p>	
+<p>&nbsp</p>
+
+<img src="/assets/3.jpg" height="70" width="50" align=right style='margin: 0px 10px 0px 0px;'  ><p style="color: grey">"It's not how much we give but how much love we put into giving"  -Mother Theresa</p>
+
+<p>&nbsp</p>	
+<hr noshade width="75%">
+
+<p>&nbsp</p>
+
+
+<img src="/assets/4.jpg" height="70" width="50" align=left style='margin: 0px 10px 0px 0px;' ><p  style="color: grey">"No one has ever become poor by giving"  -Anne Frank, Diary of Anne Frank </p>
+<p>&nbsp</p>	
+<hr noshade width="75%">
+
+<p>&nbsp</p>
+<img src="/assets/5.jpg" height="70" width="50" align=right style='margin: 0px 10px 0px 0px;'  ><p  style="color: grey">"The simplest acts of kindness are by far more powerful than &nbsp a thousand heads bowing in prayer"  -Mahatma Gandhi </p>
+
+<p>&nbsp</p>	
+<hr noshade width="75%">
+
+<p>&nbsp</p>
+
+
+<img src="/assets/6.jpg" height="70" width="50" align=left style='margin: 0px 10px 0px 0px;' ><p  style="color: grey">"To ease another's heartache is to forget one's own"  -Abraham Lincoln </p>
+<p>&nbsp</p>	
+<hr noshade width="75%">
+
+<p>&nbsp</p>
+<img src="/assets/7.jpg" height="70" width="50" align=right style='margin: 0px 10px 0px 0px;'  ><p style="color: grey">"No one is useless in this world who lightens the burdens of another" -Charles Dickens </p>
+
+<p>&nbsp</p>	
+<hr noshade width="75%">
+
+<p>&nbsp</p>
+
+
+
+
+<p>&nbsp</p>
+</div>
+		<p>&nbsp</p>
+
+<div style="background-color:#202020 ";>
+	<p>&nbsp</p>
+	<h1 align="center">@Copyrights FundMe Organization</h1> 
+		<p>&nbsp</p>
+
+	</div>
+	</body>
+</html>

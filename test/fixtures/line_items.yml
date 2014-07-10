@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  kid_id: 
+  cart_id: 
+
+two:
+  kid_id: 
+  cart_id: 

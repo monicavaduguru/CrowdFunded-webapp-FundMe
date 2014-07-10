@@ -1,0 +1,190 @@
+<html>
+	
+<head> 
+			<%= stylesheet_link_tag "style.css" %>
+
+	  <script type="text/javascript">
+$(document).ready(function(){
+
+    //Check if the current URL contains '#'
+    if(document.URL.indexOf("#")==-1)
+    {
+    // Set the URL to whatever it was plus "#".
+    url = document.URL+"#";
+    location = "#";
+
+    //Reload the page
+    location.reload(true);
+    
+    }
+    });
+</script>
+
+  		<script type="text/javascript">var switchTo5x=true;</script>
+<script type="text/javascript">var switchTo5x=true;</script>
+<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+<script type="text/javascript">stLight.options({publisher: "ur-7fe16243-3b6b-9352-a0a2-3bd632e0778f", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script><style>
+	
+	
+
+	<style>
+	
+	
+	</style>
+<title> First App in ROR 
+	
+</title>
+</head>
+
+<body style="background-color: black">
+	<div id="imagecontainer" style="height: 450px; background-size:cover;">
+		<div id="header">
+			<div class="container"> 
+				
+				<!-- Logo -->
+				<div id="logo">
+					<h2>FundMe</h2>
+					<span>Donate and make life better</span>
+				</div>
+
+	<nav id="nav">
+					<ul>
+						<li class="active"><a href="main.html">Homepage</a></li>
+						<li ><a href="edu.html">Donate for Education</a></li>
+						<li><a href="rec.html">Donate for Recreation</a></li>
+						<li><a href="contact.html">Contact Us</a></li>
+					</ul>
+				</nav>
+				</div>
+</div>
+</div>
+
+</div>
+
+<div style="width: 100%; overflow: hidden; ">
+	
+    <div style="width: 900px; float: left;">
+    	<div align="center"><% if notice %>
+  <p class="alert alert-success"><%= notice %></p>
+<% end %>
+<% if alert %>
+  <p class="alert alert-danger"><%= alert %></p>
+<% end %></div>
+    		<div style="width: 100%; overflow: hidden; ">
+  
+    			<div style="width: 430px; float: left; margin: 0px 20px 0px 10px;">
+    				<p>&nbsp;</p>
+
+    				<h3 style="color: white">The Power and Promise of Education</h3>
+    				<p style="text-align: justify; color: grey; text-justify: inter-word">
+
+<p>&nbsp;</p>
+<p style="text-align: justify; text-justify: inter-word; color: grey"> &nbsp; &nbsp; &nbsp; &nbsp;Education is the road that children follow to reach their full potential in life.
+Yet many children in need around the world do not get a quality education where they
+ can learn and develop. </p>
+ <p style="text-align: justify; text-justify: inter-word; color: grey">
+ &nbsp; &nbsp; &nbsp; &nbsp;To advance learning, FundMe supports education programs for 
+ children by providing them with a portal to display their interests and request for sponsorship.</p>
+    				<p>&nbsp;</p>
+
+    				<a href="edu.html"><img alt="140x140" src="/assets/edukid.JPG" height="620px" width="430px" /></a>
+
+				</div>
+    			<div style="margin-left: 470px; ">
+    				    				<p style="text-align: justify;color: grey; text-justify: inter-word">
+<p>&nbsp;</p>
+
+    				<h3 style="color: white">All work and no play</h3>
+<p>&nbsp;</p>
+
+ <p style="text-align: justify; text-justify: inter-word; color: grey">&nbsp; &nbsp; &nbsp; &nbsp;Recreation helps lay the foundation for healthy, active lifestyles giving 
+ children a zeal to perform better. But not all children have the oppurtunity to be able to afford 
+ extra curricular activities.
+ </p>
+ <p style="text-align: justify; text-justify: inter-word; color: grey">
+ 	
+ &nbsp; &nbsp; &nbsp; &nbsp; The mission of FundMe is to help disadvantaged young people throughout
+ the world to be able to take up their passion and also excel in them.</p>
+<p>&nbsp;</p>
+
+    				<a href="rec.html"><img  src="/assets/reckid.jpg" height="620px" width="430px"/></a>
+
+    			</div >
+    			
+			</div>				
+	</div>
+    
+    <div style="margin-left: 940px; "> <p>
+<% if user_signed_in? %>
+  Logged in as <strong><%= current_user.email %></strong>
+  <p><a href="info.html">Account information</a></p>
+  <%if Cart.exists?((session[:cart_id])) %>
+  <%cart = Cart.find(session[:cart_id])%>
+  <p><a href="http://localhost:3000/carts/<%=cart.id%>">Pending donations</a></p>
+  <%else%>
+  <p><a href="http://localhost:3000/fund_me/nocarts">Pending donations</a></p>
+  <% end %>
+  <p><a href="history.html">Transaction history</a></p>
+<% end %>
+<%= render 'devise/menu/registration_items' %>
+<%= render 'devise/menu/login_items' %>
+
+  
+</p>
+	
+<p>&nbsp</p>
+<div style="color: grey" align="center"><p style="color: grey">Support the cause by sharing :</p>
+	<span class='st_email_large' displayText='Email'  st_image="http://kidsplaceinternational.org/wp-content/uploads/2011/03/Serious-Little-Girl-Holding-a-Please-Help-Sign.jpg" st_title="Support the cause!! (FundMe)" st_summary="Hi, Please support the cause. Follow the link and donate  :http://localhost:3000/fund_me/main.html"></span>
+							<span class='st_facebook_large' displayText='Facebook' st_image="http://tmacfitness.com/wp-content/uploads/2013/04/Beauty-of-nature-random-4884759-1280-800.jpg" st_title="Support the cause!! (FundMe)" st_summary="Hi, Please support the cause. Follow the link and donate  :http://localhost:3000/fund_me/main.html"></span>
+	
+		<p>&nbsp</p>
+</div>
+
+<img src="/assets/3.jpg" height="70" width="50" align=right style='margin: 0px 10px 0px 0px;'  ><p style="color: grey">"It's not how much we give but how much love we put into giving"  -Mother Theresa</p>
+
+<p>&nbsp</p>	
+<hr noshade width="75%">
+
+<p>&nbsp</p>
+
+
+<img src="/assets/4.jpg" height="70" width="50" align=left style='margin: 0px 10px 0px 0px;' ><p  style="color: grey">"No one has ever become poor by giving"  -Anne Frank, Diary of Anne Frank </p>
+<p>&nbsp</p>	
+<hr noshade width="75%">
+
+<p>&nbsp</p>
+<img src="/assets/5.jpg" height="70" width="50" align=right style='margin: 0px 10px 0px 0px;'  ><p  style="color: grey">"The simplest acts of kindness are by far more powerful than &nbsp a thousand heads bowing in prayer"  -Mahatma Gandhi </p>
+
+<p>&nbsp</p>	
+<hr noshade width="75%">
+
+<p>&nbsp</p>
+
+
+<img src="/assets/6.jpg" height="70" width="50" align=left style='margin: 0px 10px 0px 0px;' ><p  style="color: grey">"To ease another's heartache is to forget one's own"  -Abraham Lincoln </p>
+<p>&nbsp</p>	
+<hr noshade width="75%">
+
+<p>&nbsp</p>
+
+<img src="/assets/7.jpg" height="70" width="50" align=right style='margin: 0px 10px 0px 0px;'  ><p style="color: grey">"No one is useless in this world who lightens the burdens of another" -Charles Dickens </p>
+
+<p>&nbsp</p>	
+<hr noshade width="75%">
+
+<p>&nbsp</p>
+
+
+
+
+</div>
+
+<div style="background-color:#202020 ";>
+	<p>&nbsp</p>
+	<h1 align="center">@Copyrights FundMe Organization</h1> 
+	
+		<p>&nbsp</p>
+
+	</div>
+	</div>
+</html>

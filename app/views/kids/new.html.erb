@@ -1,0 +1,40 @@
+<html>
+
+<head> 
+	<%= stylesheet_link_tag "style.css" %>
+<title> First App in ROR 
+	
+</title>
+</head>
+
+<body style="background-color: black">
+	
+	<div id="imagecontainer" style="height: 450px">
+		<div id="header">
+			<div class="container"> 
+				
+				<!-- Logo -->
+				<div id="logo">
+					<h2>FundMe</h2>
+					<span>Donate and make life better</span>
+				</div>
+	</div>
+</div>
+
+</div>
+<div align="center" style="color: white">
+	<div align="center"><% if notice %>
+  <p class="alert alert-success"><%= notice %></p>
+<% end %>
+<% if alert %>
+  <p class="alert alert-danger"><%= alert %></p>
+<% end %></div>
+	<h1>New kid</h1>
+
+<%= render 'form' %>
+
+<%= link_to 'Back', kids_path %>
+
+</div>
+</body>
+</html>

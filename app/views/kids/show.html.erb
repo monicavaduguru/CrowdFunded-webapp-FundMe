@@ -1,0 +1,76 @@
+<html>
+
+<head> 
+	<%= stylesheet_link_tag "style.css" %>
+<title> First App in ROR 
+	
+</title>
+</head>
+
+<body style="background-color: black">
+	
+	<div id="imagecontainer" style="height: 450px">
+		<div id="header">
+			<div class="container"> 
+				
+				<!-- Logo -->
+				<div id="logo">
+					<h2>FundMe</h2>
+					<span>Donate and make life better</span>
+				</div>
+	</div>
+</div>
+
+</div>
+<div align="center"><% if notice %>
+  <p class="alert alert-success"><%= notice %></p>
+<% end %>
+<% if alert %>
+  <p class="alert alert-danger"><%= alert %></p>
+<% end %></div>
+
+<p>
+  <strong>Name:</strong>
+  <%= @kid.name %>
+</p>
+
+<p>
+  <strong>Age:</strong>
+  <%= @kid.age %>
+</p>
+
+<p>
+  <strong>Purpose:</strong>
+  <%= @kid.purpose %>
+</p>
+
+<p>
+  <strong>Money required:</strong>
+  <%= @kid.money_required %>
+</p>
+
+<p>
+  <strong>Comments:</strong>
+  <%= @kid.comments %>
+</p>
+
+<p>
+  <strong>Image url:</strong>
+  <%= @kid.image_url %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @kid.address %>
+</p>
+
+<p>
+  <strong>Money received:</strong>
+  <%= @kid.money_received %>
+</p>
+
+<%= link_to 'Edit', edit_kid_path(@kid) %> |
+<%= link_to 'Back', kids_path %>
+</div>
+</body>
+</html>

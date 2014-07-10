@@ -1,0 +1,474 @@
+<html>
+
+<head> 
+			<%= stylesheet_link_tag "style.css" %>
+
+	<script type="text/javascript">
+$(document).ready(function () {
+    $('.group').hide();
+    $('#Date').show();
+    $('#selectMe').change(function () {
+        $('.group').hide();
+        $('#'+$(this).val()).show();
+    })
+});
+	</script>
+		<script type="text/javascript">
+
+	function validate() {
+     { 
+     	data=document.forms["donate_form"]["Input"].value
+     	if (isNaN(data))
+     		{alert("Please enter a valid integer");
+        return false;}
+     	else
+     	//var value = Number(Input.value);
+ 			return true;
+    
+    }
+}
+function validate1() {
+     { 
+     	data=document.forms["donate1_form"]["Input"].value
+     	if (isNaN(data))
+     		{alert("Please enter a valid integer");
+     		return false;
+     	}
+
+     	else
+     	//var value = Number(Input.value);
+ 			return true;
+    
+    }
+}
+function validate2() {
+     { 
+     	data=document.forms["donate2_form"]["Input"].value
+     	if (isNaN(data))
+     		{alert("Please enter a valid integer");
+        return false;}
+     	else
+     	//var value = Number(Input.value);
+ 			return true;
+    
+    }
+}
+function validate3() {
+     { 
+     	data=document.forms["donate3_form"]["Input"].value
+     	if (isNaN(data))
+     		{alert("Please enter a valid integer");
+        return false;}
+     	else
+     	//var value = Number(Input.value);
+ 			return true;
+    
+    }
+}
+	</script>
+
+<script type="text/javascript">var switchTo5x=true;</script>
+<script type="text/javascript">var switchTo5x=true;</script>
+<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+<script type="text/javascript">stLight.options({publisher: "ur-7fe16243-3b6b-9352-a0a2-3bd632e0778f", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
+<style>
+
+
+div.scroll
+{
+width:400px;
+height:300px;
+overflow:scroll;
+}	
+	
+</style>
+<title> First App in ROR 
+	
+</title>
+</head>
+
+<body style="background-color: black">
+	<div id="imagecontainer">
+		<div id="header">
+			<div class="container" > 
+				
+				<!-- Logo -->
+				<div id="logo">
+					<h2>FundMe</h2>
+					<span>Donate and make life better</span>
+				</div>
+
+				<nav id="nav">
+					<ul>
+						<li><a href="main.html">Homepage</a></li>
+						<li ><a href="edu.html">Donate for Education</a></li>
+						<li class="active"><a href="rec.html">Donate for Recreation</a></li>
+						<li><a href="contact.html">Contact Us</a></li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+	</div>
+	
+</script>
+
+	<div style="width: 100%; overflow: hidden; ">
+    <div style="width: 900px; float: left;">
+    	<div align="center"><% if notice %>
+  <p class="alert alert-success"><%= notice %></p>
+<% end %>
+<% if alert %>
+  <p class="alert alert-danger"><%= alert %></p>
+<% end %></div>
+    						<% if not user_signed_in? %>
+							<p align="center" style="color: grey" class="byline">Please login to donate</p>
+							<%end%>
+							<h2 align="center" style="color: green">List of children</h2>
+							
+								<!--<p align="center" style="color: grey" class="byline">Education</p>-->
+								<p align="center"> Show Children by:</p>
+								<div align="center">
+								<select  id="selectMe">
+    <option value="Date"  >Recently added</option>
+    <option value="Name" >Name</option>
+    <option value="Money" >Remaining money Needed</option>
+    <option value="Age" >Age (increasing)</option>
+</select>
+</div>
+						<div id="Date" class="group">
+						<table style="border-spacing: 0.5em">	
+							<col width="460">
+  							<col width="400">
+						<% @kidsdate.each do |kid| %>
+						<%if kid.purpose=="Recreation"%>
+						<%if kid.money_required>kid.money_received%>
+						<tr>
+							<th style=" padding-top: 2em;padding-bottom: 2em;">
+  						<div style="color:white;font-size:2em">
+  							<img src="/assets/<%= kid.image_url %>" height="300" width="450" align=left style='margin: 0px 50px 0px 10px;'  >
+  						  	</th>
+  						  	<th align="left" style="color:grey"><p ><a style="color:grey" id="<%=kid.id%>">My name:<%= kid.name %></a></p>
+      						<p style="color:grey"><span >My age:<%= kid.age %></span></p>
+      						<!--<p><span style="color:green">Sex:<%= kid.age %></span></p>
+							<p><span style="color:green">Country:<%= kid.age %></span></p>
+							-->	
+						    <p style="color:grey"><span >I need: $<%= kid.money_required %></span></p>
+					    	<p style="color:grey"><span>$<%= kid.money_needed %> more to go</span></p>
+					    	<!--<p><span  style="color:green">Address:<%= kid.address %></span></p>
+							-->
+							
+							<div><p style=" font-style:italic; text-align: justify; text-justify: inter-word;"><span style="color:green">" <%= kid.comments %> &nbsp"</span></p></div>
+
+							<a href="#" onClick="openWin(a=<%= kid.address.to_json %>)" ><p style="color:grey">Click to see where I stay</p></a>
+								<% if user_signed_in? %>
+								<div><%= form_tag({ :controller => "line_items", :action => "create"}, {:id=>"donate_form", :name=>"donate_form", :onSubmit => "return validate()"}) do %>  
+								<div style="display: inline-block"><p><%= text_field_tag "Input" %></p></div>
+								<div style="display: inline-block"><p>(in dollars)</p></div>
+								<%= hidden_field_tag(:Input1 , "#{kid.name}") %>
+								<div style="display: inline-block"><%= submit_tag("donate") %></div>
+								<%end%>
+									  	</div>	
+									  	<%end%>	
+									  	<!--<p>Support cause by sharing: 		
+									  	<span class='st_email_large' displayText='Email'  st_image="http://www.authenticm.com/wp-content/uploads/2011/09/AmericaMali.jpg" st_title="Support the cause!! (FundMe)" st_summary="Hi, Please support the cause. Please donate to <%=kid.name%> .Follow the link to donate  :http://localhost:3000/fund_me/edu.html#<%=kid.id%>"></span>
+							<span class='st_facebook_large' displayText='Facebook' st_image="http://tmacfitness.com/wp-content/uploads/2013/04/Beauty-of-nature-random-4884759-1280-800.jpg" st_title="Support the cause!! (FundMe)" st_summary="Hi, Please support the cause. Please donate to <%=kid.name%> .Follow the link to donate  :http://localhost:3000/fund_me/edu.html#<%=kid.id%>"></span>
+							
+									  	</p>-->
+
+							
+							
+						</div>
+						</th>	
+							</tr>
+						<%end%>
+						<%end%>
+						<%end%>
+						</table>
+						
+				</div>
+				
+				<div id="Age" class="group">
+						<table style="border-spacing: 0.5em">	
+							<col width="460">
+  							<col width="400">
+						<% @kidsage.each do |kid| %>
+						<%if kid.purpose=="Recreation"%>
+						<%if kid.money_required>kid.money_received%>
+						<tr>
+							<th style=" padding-top: 2em;padding-bottom: 2em;">
+  						<div style="color:white;font-size:2em">
+  							<img src="/assets/<%= kid.image_url %>" height="300" width="450" align=left style='margin: 0px 50px 0px 10px;'  >
+  						  	</th>
+  						  	<th align="left" style="color:grey"><p ><a style="color:grey" id="<%=kid.id%>">My name:<%= kid.name %></a></p>
+      						<p style="color:grey"><span >My age:<%= kid.age %></span></p>
+      						<!--<p><span style="color:green">Sex:<%= kid.age %></span></p>
+							<p><span style="color:green">Country:<%= kid.age %></span></p>
+							-->	
+						    <p style="color:grey"><span >I need: $<%= kid.money_required %></span></p>
+					    	<p style="color:grey"><span>$<%= kid.money_needed %> more to go</span></p>
+					    	<!--<p><span  style="color:green">Address:<%= kid.address %></span></p>
+							-->
+							
+							<div><p style=" font-style:italic; text-align: justify; text-justify: inter-word;"><span style="color:green">" <%= kid.comments %> &nbsp"</span></p></div>
+
+							<a href="#" onClick="openWin(a=<%= kid.address.to_json %>)" ><p style="color:grey">Click to see where I stay</p></a>
+								<% if user_signed_in? %>
+								<div><%= form_tag({ :controller => "line_items", :action => "create"}, {:id=>"donate1_form", :name=>"donate1_form", :onSubmit => "return validate()"}) do %>  
+								<div style="display: inline-block"><p><%= text_field_tag "Input" %></p></div>
+								<div style="display: inline-block"><p>(in dollars)</p></div>
+								<%= hidden_field_tag(:Input1 , "#{kid.name}") %>
+								<div style="display: inline-block"><%= submit_tag("donate") %></div>
+								<%end%>
+									  	</div>	
+									  	<%end%>	
+									  	<!--<p>Support cause by sharing: 		
+									  	<span class='st_email_large' displayText='Email'  st_image="http://www.authenticm.com/wp-content/uploads/2011/09/AmericaMali.jpg" st_title="Support the cause!! (FundMe)" st_summary="Hi, Please support the cause. Please donate to <%=kid.name%> .Follow the link to donate  :http://localhost:3000/fund_me/edu.html#<%=kid.id%>"></span>
+							<span class='st_facebook_large' displayText='Facebook' st_image="http://tmacfitness.com/wp-content/uploads/2013/04/Beauty-of-nature-random-4884759-1280-800.jpg" st_title="Support the cause!! (FundMe)" st_summary="Hi, Please support the cause. Please donate to <%=kid.name%> .Follow the link to donate  :http://localhost:3000/fund_me/edu.html#<%=kid.id%>"></span>
+							
+									  	</p>-->
+
+							
+							
+						</div>
+						</th>	
+							</tr>
+						<%end%>
+						<%end%>
+						<%end%>
+						</table>
+						
+				</div>
+				
+				<div id="Name" class="group">
+						<table style="border-spacing: 0.5em">	
+							<col width="460">
+  							<col width="400">
+						<% @kids.each do |kid| %>
+						<%if kid.purpose=="Recreation"%>
+						<%if kid.money_required>kid.money_received%>
+						<tr>
+							<th style=" padding-top: 2em;padding-bottom: 2em;">
+  						<div style="color:white;font-size:2em">
+  							<img src="/assets/<%= kid.image_url %>" height="300" width="450" align=left style='margin: 0px 50px 0px 10px;'  >
+  						  	</th>
+  						  	<th align="left" style="color:grey"><p ><a style="color:grey" id="<%=kid.id%>">My name:<%= kid.name %></a></p>
+      						<p style="color:grey"><span >My age:<%= kid.age %></span></p>
+      						<!--<p><span style="color:green">Sex:<%= kid.age %></span></p>
+							<p><span style="color:green">Country:<%= kid.age %></span></p>
+							-->	
+						    <p style="color:grey"><span >I need: $<%= kid.money_required %></span></p>
+					    	<p style="color:grey"><span>$<%= kid.money_needed %> more to go</span></p>
+					    	<!--<p><span  style="color:green">Address:<%= kid.address %></span></p>
+							-->
+							
+							<div><p style=" font-style:italic; text-align: justify; text-justify: inter-word;"><span style="color:green">" <%= kid.comments %> &nbsp"</span></p></div>
+
+							<a href="#" onClick="openWin(a=<%= kid.address.to_json %>)" ><p style="color:grey">Click to see where I stay</p></a>
+								<% if user_signed_in? %>
+								<div><%= form_tag({ :controller => "line_items", :action => "create"}, {:id=>"donate2_form", :name=>"donate2_form", :onSubmit => "return validate()"}) do %>  
+								<div style="display: inline-block"><p><%= text_field_tag "Input" %></p></div>
+								<div style="display: inline-block"><p>(in dollars)</p></div>
+								<%= hidden_field_tag(:Input1 , "#{kid.name}") %>
+								<div style="display: inline-block"><%= submit_tag("donate") %></div>
+								<%end%>
+									  	</div>	
+									  	<%end%>	
+									  	<!--<p>Support cause by sharing: 		
+									  	<span class='st_email_large' displayText='Email'  st_image="http://www.authenticm.com/wp-content/uploads/2011/09/AmericaMali.jpg" st_title="Support the cause!! (FundMe)" st_summary="Hi, Please support the cause. Please donate to <%=kid.name%> .Follow the link to donate  :http://localhost:3000/fund_me/edu.html#<%=kid.id%>"></span>
+							<span class='st_facebook_large' displayText='Facebook' st_image="http://tmacfitness.com/wp-content/uploads/2013/04/Beauty-of-nature-random-4884759-1280-800.jpg" st_title="Support the cause!! (FundMe)" st_summary="Hi, Please support the cause. Please donate to <%=kid.name%> .Follow the link to donate  :http://localhost:3000/fund_me/edu.html#<%=kid.id%>"></span>
+							
+									  	</p>-->
+
+							
+							
+						</div>
+						</th>	
+							</tr>
+						<%end%>
+						<%end%>
+						<%end%>
+						</table>
+						
+				</div>
+				<div id="Money" class="group">
+						<table style="border-spacing: 0.5em">	
+							<col width="460">
+  							<col width="400">
+						<% @kidsmoney.each do |kid| %>
+						<%if kid.purpose=="Recreation"%>
+						<%if kid.money_required>kid.money_received%>
+						<tr>
+							<th style=" padding-top: 2em;padding-bottom: 2em;">
+  						<div style="color:white;font-size:2em">
+  							<img src="/assets/<%= kid.image_url %>" height="300" width="450" align=left style='margin: 0px 50px 0px 10px;'  >
+  						  	</th>
+  						  	<th align="left" style="color:grey"><p ><a style="color:grey" id="<%=kid.id%>">My name:<%= kid.name %></a></p>
+      						<p style="color:grey"><span >My age:<%= kid.age %></span></p>
+      						<!--<p><span style="color:green">Sex:<%= kid.age %></span></p>
+							<p><span style="color:green">Country:<%= kid.age %></span></p>
+							-->	
+						    <p style="color:grey"><span >I need: $<%= kid.money_required %></span></p>
+					    	<p style="color:grey"><span>$<%= kid.money_needed %> more to go</span></p>
+					    	<!--<p><span  style="color:green">Address:<%= kid.address %></span></p>
+							-->
+							
+							<div><p style=" font-style:italic; text-align: justify; text-justify: inter-word;"><span style="color:green">" <%= kid.comments %> &nbsp"</span></p></div>
+
+							<a href="#" onClick="openWin(a=<%= kid.address.to_json %>)" ><p style="color:grey">Click to see where I stay</p></a>
+								<% if user_signed_in? %>
+								<div><%= form_tag({ :controller => "line_items", :action => "create"}, {:id=>"donate3_form", :name=>"donate3_form", :onSubmit => "return validate()"}) do %>  
+								<div style="display: inline-block"><p><%= text_field_tag "Input" %></p></div>
+								<div style="display: inline-block"><p>(in dollars)</p></div>
+								<%= hidden_field_tag(:Input1 , "#{kid.name}") %>
+								<div style="display: inline-block"><%= submit_tag("donate") %></div>
+								<%end%>
+									  	</div>	
+									  	<%end%>	
+									  	<!--<p>Support cause by sharing: 		
+									  	<span class='st_email_large' displayText='Email'  st_image="http://www.authenticm.com/wp-content/uploads/2011/09/AmericaMali.jpg" st_title="Support the cause!! (FundMe)" st_summary="Hi, Please support the cause. Please donate to <%=kid.name%> .Follow the link to donate  :http://localhost:3000/fund_me/edu.html#<%=kid.id%>"></span>
+							<span class='st_facebook_large' displayText='Facebook' st_image="http://tmacfitness.com/wp-content/uploads/2013/04/Beauty-of-nature-random-4884759-1280-800.jpg" st_title="Support the cause!! (FundMe)" st_summary="Hi, Please support the cause. Please donate to <%=kid.name%> .Follow the link to donate  :http://localhost:3000/fund_me/edu.html#<%=kid.id%>"></span>
+							
+									  	</p>-->
+
+							
+							
+						</div>
+						</th>	
+							</tr>
+						<%end%>
+						<%end%>
+						<%end%>
+						</table>
+						
+				</div>
+				
+				</div>
+    
+    <div style="margin-left: 920px; "> <p>
+<% if user_signed_in? %>
+  Logged in as <strong><%= current_user.email %></strong>
+  <p><a href="info.html">Account information</a></p>
+  <%if Cart.exists?((session[:cart_id])) %>
+  <%cart = Cart.find(session[:cart_id])%>
+  <p><a href="http://localhost:3000/carts/<%=cart.id%>">Pending donations</a></p>
+  <%else%>
+  <p><a href="http://localhost:3000/fund_me/nocarts">Pending donations</a></p>
+  <% end %>
+
+  <p><a href="history.html">Transaction history</a></p>
+<% end %>
+<%= render 'devise/menu/registration_items' %>
+<%= render 'devise/menu/login_items' %>
+</p>
+
+<p>&nbsp</p>	
+<p>&nbsp</p>
+
+<img src="/assets/3.jpg" height="70" width="50" align=right style='margin: 0px 10px 0px 0px;'  ><p style="color: grey">"It's not how much we give but how much love we put into giving"  -Mother Theresa</p>
+
+<p>&nbsp</p>	
+<hr noshade width="75%">
+
+<p>&nbsp</p>
+
+
+<img src="/assets/4.jpg" height="70" width="50" align=left style='margin: 0px 10px 0px 0px;' ><p  style="color: grey">"No one has ever become poor by giving"  -Anne Frank, Diary of Anne Frank </p>
+<p>&nbsp</p>	
+<hr noshade width="75%">
+
+<p>&nbsp</p>
+
+
+<img src="/assets/5.jpg" height="70" width="50" align=right style='margin: 0px 10px 0px 0px;'  ><p  style="color: grey">"The simplest acts of kindness are by far more powerful than &nbsp a thousand heads bowing in prayer"  -Mahatma Gandhi </p>
+
+<p>&nbsp</p>	
+<hr noshade width="75%">
+
+<p>&nbsp</p>
+
+
+<img src="/assets/6.jpg" height="70" width="50" align=left style='margin: 0px 10px 0px 0px;' ><p  style="color: grey">"To ease another's heartache is to forget one's own"  -Abraham Lincoln </p>
+<p>&nbsp</p>	
+<hr noshade width="75%">
+
+<p>&nbsp</p>
+
+<img src="/assets/7.jpg" height="70" width="50" align=right style='margin: 0px 10px 0px 0px;'  ><p style="color: grey">"No one is useless in this world who lightens the burdens of another" -Charles Dickens </p>
+
+<p>&nbsp</p>	
+<hr noshade width="75%">
+
+<p>&nbsp</p>
+
+
+<img src="/assets/8.jpg" height="70" width="50" align=left style=' margin:0px 10px 0px 0px;' ><p  style="color: grey">"We make a living by what we get. We make a life by what we give."  -Winston Churchill </p>
+<p>&nbsp</p>	
+<hr noshade width="75%">
+
+<p>&nbsp</p>
+
+
+<img src="/assets/9.jpg" height="70" width="50" align=right style='  margin: 0px 10px 0px 0px;'  ><p  style="color: grey">" A bone to the dog is not charity. Charity is the bone shared with the dog, when you are just as hungry as the dog."  &nbsp -Jack London </p>
+
+<p>&nbsp</p>	
+<hr noshade width="75%">
+
+<p>&nbsp</p>
+
+
+<img src="/assets/10.jpg" height="70" width="50" align=left style=' margin: 0px 10px 0px 0px;' ><p  style="color: grey">"You have not lived today until you have done something for someone who can never repay you."  -John Bunyan </p>
+<p>&nbsp</p>	
+<hr noshade width="75%">
+
+<p>&nbsp</p>
+</div>
+</div>
+	
+	
+<div style="background-color:#202020 ";>
+	<p>&nbsp</p>
+	<p align="center" style="font-size:250%;  font-style:italic ;"><span style="color:grey  ">Recent targets met</span></p>
+	<table ><tr  align="center"; style="background-color: 505050;">
+	<%count=0%>
+	<%  @kidsdonationtime.each do |kid|%>
+	<%if kid.money_received >= kid.money_required %>
+	<% if count<3 %>
+		<td><div><p align="center" style="color: green">Name:<%=kid.name%></p><img src="/assets/<%= kid.image_url %>"  height="200" width="250"  style='margin: 0px 60px 0px 60px;' > <p align="center">&nbsp</p> </div></td>
+	<%count=count+1%>
+	<%end%>
+	<%end%>
+	<%end%>
+	<%if count==0%>
+	<p align="center" style="font-size:100%;  font-style:italic ;"><span style="color:grey  ">No targets met</span></p>
+	<%end%>
+</tr></table>
+</div>
+
+</body>
+
+</html>
+	<script type = "text/javascript">
+		 var openWin = function(a){
+		 	MyWindow=window.open('http://localhost:3000/fund_me/map.html','MyWindow','toolbar=no,location=no,directories=no,status=no, menubar=no,scrollbars=no,resizable=no,width=510,height=410'); 
+		 	MyWindow.myVariable=a;
+			if (!MyWindow) 
+				return false;
+			if(document.URL.indexOf("#")==-1)
+    {
+    // Set the URL to whatever it was plus "#".
+    url = document.URL+"#";
+    location = "#";
+
+    //Reload the page
+    location.reload(true);
+
+    }
+		 	};
+	</script>
+  						
+						
+
+
+
+
+

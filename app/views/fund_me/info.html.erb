@@ -1,0 +1,147 @@
+
+<html>
+		<%= stylesheet_link_tag "style.css" %>
+
+<head> 
+	<script type="text/javascript">
+	 <!--
+var image1=new Image()
+image1.src="/assets/banner1.jpg"
+var image2=new Image()
+image2.src="/assets/banner2.jpg"
+var image3=new Image()
+image3.src="/assets/banner3.jpg"
+var image4=new Image()
+image4.src="/assets/banner4.jpg"
+//-->
+</script>
+	<style>
+	
+	
+	</style>
+<title> First App in ROR 
+	
+</title>
+</head>
+
+<body style="background-color: black">
+	<div id="imagecontainer" style="height: 450px">
+		<div id="header">
+			<div class="container"> 
+				
+				<!-- Logo -->
+				<div id="logo">
+					<h2>FundMe</h2>
+					<span>Donate and make life better</span>
+				</div>
+
+	<nav id="nav">
+					<ul>
+						<li><a href="main.html">Homepage</a></li>
+						<li ><a href="edu.html">Donate for Education</a></li>
+						<li><a href="rec.html">Donate for Recreation</a></li>
+						<li><a href="map.html">Contact Us</a></li>
+					</ul>
+				</nav>
+				</div>
+</div>
+</div>
+
+</div>
+
+<div style="width: 100%; overflow: hidden; ">
+    <div style="width: 900px; float: left;  margin: 0px 40px 10px 40px">
+    	<div align="center"><% if notice %>
+  <p class="alert alert-success"><%= notice %></p>
+<% end %>
+<% if alert %>
+  <p class="alert alert-danger"><%= alert %></p>
+<% end %></div>
+    	<p>&nbsp;</p>
+    	<% if user_signed_in? %>
+    				<h3 align="center" style="color: white"> Account Information</h3>
+					<p  align="center" style="color: grey">Name:<strong><%= current_user.name %></strong></p>
+					<p  align="center" style="color: grey">Email id:<strong><%= current_user.email %></strong></p>
+					<p   align="center" style="color: grey">Address:<strong><%= current_user.address %></strong></p>
+					<p  align="center" style="color: grey">Contact number:<strong><%= current_user.phonenumber %></strong></p>
+    	<%else%>
+    		<p align="center">User not logged in</p>
+    	<%end%>
+    	<p>&nbsp</p>
+    	
+    	<img src="/assets/banner1.jpg" name="slide" width="800" height="500" style='margin: 0px 40px 40px 40px;' />
+	<script>
+<!--
+//variable that will increment through the images
+var step=1
+function slideit(){
+//if browser does not support the image object, exit.
+if (!document.images)
+return
+document.images.slide.src=eval("image"+step+".src")
+if (step<4)
+step++
+else
+step=1
+//call function "slideit()" every 2.5 seconds
+setTimeout("slideit()",3500)
+}
+slideit()
+</script>
+
+
+    					</div>
+
+    <div style="margin-left: 920px; "> <p>
+<% if user_signed_in? %>
+  Logged in as <strong><%= current_user.email %></strong>
+  <p><a href="info.html">Account information</a></p>
+  <%if Cart.exists?((session[:cart_id])) %>
+  <%cart = Cart.find(session[:cart_id])%>
+  <p><a href="http://localhost:3000/carts/<%=cart.id%>">Pending donations</a></p>
+  <%else%>
+  <p><a href="http://localhost:3000/fund_me/nocarts">Pending donations</a></p>
+  <% end %>
+  <p><a href="history.html">Transaction history</a></p>
+<% end %>
+<%= render 'devise/menu/registration_items' %>
+<%= render 'devise/menu/login_items' %>
+</p>
+
+<p>&nbsp</p>	
+<p>&nbsp</p>
+
+<img src="/assets/3.jpg" height="70" width="50" align=right style='margin: 0px 10px 0px 0px;'  ><p style="color: grey">"It's not how much we give but how much love we put into giving"  -Mother Theresa</p>
+
+<p>&nbsp</p>	
+<hr noshade width="75%">
+
+<p>&nbsp</p>
+
+
+<img src="/assets/4.jpg" height="70" width="50" align=left style='margin: 0px 10px 0px 0px;' ><p  style="color: grey">"No one has ever become poor by giving"  -Anne Frank, Diary of Anne Frank </p>
+<p>&nbsp</p>	
+<hr noshade width="75%">
+
+<p>&nbsp</p>
+<img src="/assets/5.jpg" height="70" width="50" align=right style='margin: 0px 10px 0px 0px;'  ><p  style="color: grey">"The simplest acts of kindness are by far more powerful than &nbsp a thousand heads bowing in prayer"  -Mahatma Gandhi </p>
+
+<p>&nbsp</p>	
+<hr noshade width="75%">
+
+<p>&nbsp</p>
+
+
+<img src="/assets/6.jpg" height="70" width="50" align=left style='margin: 0px 10px 0px 0px;' ><p  style="color: grey">"To ease another's heartache is to forget one's own"  -Abraham Lincoln </p>
+<p>&nbsp</p>	
+<hr noshade width="75%">
+
+<p>&nbsp</p>
+</div>
+<div style="background-color:#202020 ";>
+	<p>&nbsp</p>
+	<h1 align="center">@Copyrights FundMe Organization</h1> 
+		<p>&nbsp</p>
+
+	</div>
+</html>
